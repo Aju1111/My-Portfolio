@@ -1,0 +1,1706 @@
+/* ============================================
+   macOS Portfolio — Muhsin PA
+   ============================================ */
+
+:root {
+  --bg: #0A0A0A;
+  --mac-bg: rgba(30, 30, 30, 0.72);
+  --mac-bg-solid: #1e1e1e;
+  --mac-border: rgba(255, 255, 255, 0.12);
+  --mac-border-light: rgba(255, 255, 255, 0.08);
+  --accent: #007AFF;
+  --accent-hover: #0066DD;
+  --tl-close: #FF5F57;
+  --tl-minimize: #FFBD2E;
+  --tl-maximize: #28CA42;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --dock-height: 64px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 48px; }
+
+::selection {
+  background: rgba(0, 122, 255, 0.35);
+  color: white;
+}
+
+/* ---- Desktop Wallpaper ---- */
+.mac-desktop {
+  background: #0A0A0A;
+  min-height: 100vh;
+}
+
+.mac-wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0, 122, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(88, 86, 214, 0.18) 0%, transparent 45%),
+    radial-gradient(ellipse 70% 60% at 50% 90%, rgba(255, 45, 85, 0.1) 0%, transparent 50%),
+    linear-gradient(180deg, #0d0d12 0%, #0A0A0A 40%, #080810 100%);
+  animation: wallpaper-shift 24s ease-in-out infinite alternate;
+}
+
+@keyframes wallpaper-shift {
+  0% { filter: hue-rotate(0deg) brightness(1); }
+  100% { filter: hue-rotate(8deg) brightness(1.05); }
+}
+
+.mac-wallpaper-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ---- macOS Menu Bar ---- */
+.mac-menu-bar {
+  height: 28px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  transform: translateY(0);
+  transition: background 0.3s ease;
+}
+
+body:not(.page-ready) .mac-menu-bar {
+  transform: translateY(-100%);
+}
+
+body.page-ready .mac-menu-bar {
+  animation: menu-slide-down 0.55s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+@keyframes menu-slide-down {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.menu-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 16px;
+  max-width: 100%;
+}
+
+.menu-bar-left,
+.menu-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.menu-apple {
+  opacity: 0.9;
+  display: flex;
+}
+
+.menu-app-name {
+  font-size: 13px;
+  margin-right: 8px;
+}
+
+.menu-items {
+  gap: 4px;
+}
+
+.menu-item {
+  padding: 2px 10px;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  transition: background 0.15s ease;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.menu-status {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+}
+
+.menu-icon {
+  opacity: 0.7;
+  display: flex;
+}
+
+.menu-clock {
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  min-width: 140px;
+  text-align: right;
+}
+
+/* ---- macOS Window ---- */
+.mac-window {
+  background: rgba(28, 28, 30, 0.78);
+  backdrop-filter: blur(48px) saturate(200%);
+  -webkit-backdrop-filter: blur(48px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.06),
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    0 24px 80px rgba(0, 0, 0, 0.55),
+    0 8px 32px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  transform-origin: center center;
+}
+
+.mac-window-lg { max-width: 100%; }
+.mac-window-xl { max-width: 100%; }
+
+.mac-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--mac-border-light);
+  user-select: none;
+}
+
+.mac-titlebar-dark {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.mac-window-title {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-right: 52px;
+}
+
+.traffic-lights {
+  display: flex;
+  gap: 8px;
+  width: 52px;
+  flex-shrink: 0;
+}
+
+.traffic-lights span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s var(--spring), filter 0.2s ease;
+  position: relative;
+}
+
+.tl-close { background: var(--tl-close); }
+.tl-minimize { background: var(--tl-minimize); }
+.tl-maximize { background: var(--tl-maximize); }
+
+.mac-window:hover .traffic-lights span {
+  filter: brightness(1.1);
+}
+
+.traffic-lights span:hover {
+  transform: scale(1.15);
+}
+
+.mac-window-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid var(--mac-border-light);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  min-height: 36px;
+}
+
+.toolbar-path {
+  flex: 1;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.toolbar-view,
+.toolbar-device {
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.mac-window-body {
+  padding: 0;
+}
+
+/* ---- MacBook Device ---- */
+.macbook-chassis {
+  perspective: 1200px;
+  max-width: 900px;
+  margin: 0 auto;
+  will-change: transform, opacity;
+}
+
+.hero-macbook {
+  opacity: 0;
+  transform: translateY(28px) scale(0.97);
+}
+
+body.page-ready .hero-macbook {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.7s cubic-bezier(0.34, 1.2, 0.64, 1),
+              transform 0.7s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.scroll-hint {
+  opacity: 0;
+  animation: none;
+}
+
+body.page-ready .scroll-hint {
+  animation: scroll-hint-fade 0.6s ease 0.8s forwards, scroll-hint-bounce 2s ease-in-out 1.4s infinite;
+}
+
+@keyframes scroll-hint-fade {
+  to { opacity: 1; }
+}
+
+@keyframes scroll-hint-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.floating-window {
+  opacity: 0;
+  transform: scale(0.88) translateY(20px);
+}
+
+body.page-ready .floating-window {
+  transition: opacity 0.55s cubic-bezier(0.34, 1.2, 0.64, 1),
+              transform 0.55s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+body.page-ready .mac-window-hero {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition-delay: 0.25s;
+}
+
+body.page-ready .mac-window-terminal {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition-delay: 0.4s;
+}
+
+.macbook-lid {
+  background: linear-gradient(180deg, #2a2a2e 0%, #1a1a1c 100%);
+  border-radius: 16px 16px 0 0;
+  padding: 12px 12px 0;
+  box-shadow: 0 -2px 0 rgba(255, 255, 255, 0.05) inset;
+}
+
+.macbook-bezel {
+  background: #0a0a0a;
+  border-radius: 10px 10px 0 0;
+  padding: 8px 8px 0;
+  position: relative;
+}
+
+.macbook-camera {
+  width: 6px;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.macbook-screen {
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f18 50%, #12121f 100%);
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.macbook-base {
+  height: 14px;
+  background: linear-gradient(180deg, #3a3a3e 0%, #2a2a2e 40%, #1a1a1c 100%);
+  border-radius: 0 0 12px 12px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.macbook-base::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: #1a1a1c;
+  border-radius: 0 0 4px 4px;
+}
+
+.macbook-trackpad {
+  width: 100px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0 0 4px 4px;
+  margin: 4px auto 0;
+}
+
+/* ---- Desktop Inside MacBook ---- */
+.desktop-inside {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 12px;
+  min-height: 280px;
+}
+
+.desktop-icons {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.desktop-icon-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #007AFF, #5856D6);
+}
+
+.resume-icon {
+  background: linear-gradient(135deg, #FF9500, #FF2D55);
+}
+
+.projects-icon {
+  background: linear-gradient(135deg, #34C759, #007AFF);
+}
+
+/* Floating windows on desktop */
+.floating-window {
+  position: absolute;
+  border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.mac-window-hero {
+  top: 8%;
+  left: 4%;
+  width: 62%;
+  z-index: 2;
+}
+
+.mac-window-terminal {
+  bottom: 8%;
+  right: 4%;
+  width: 48%;
+  z-index: 1;
+}
+
+.hero-window-body {
+  padding: 16px;
+}
+
+.hero-grid {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.hero-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.hero-avatar,
+.hero-avatar-fallback {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 122, 255, 0.3), rgba(88, 86, 214, 0.3));
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-status-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background: #34C759;
+  border: 2px solid #1e1e1e;
+  border-radius: 50%;
+}
+
+.hero-greeting {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-name {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.hero-role {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 2px;
+}
+
+.hero-desc {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 8px;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.hero-socials {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.hero-social {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.2s ease;
+}
+
+.hero-social:hover {
+  background: rgba(0, 122, 255, 0.2);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Terminal */
+.terminal-body {
+  padding: 12px;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  font-size: 9px;
+  line-height: 1.6;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.t-green { color: #34C759; }
+.t-blue { color: #007AFF; }
+.t-white { color: rgba(255, 255, 255, 0.9); }
+.t-dim { color: rgba(255, 255, 255, 0.35); }
+
+.terminal-cursor {
+  animation: blink 1s step-end infinite;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ---- macOS Buttons ---- */
+.mac-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: transform 0.2s var(--spring), box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.mac-btn-sm {
+  padding: 6px 12px;
+  font-size: 11px;
+}
+
+.mac-btn-primary {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.35);
+}
+
+.mac-btn-primary:hover {
+  background: var(--accent-hover);
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px rgba(0, 122, 255, 0.45);
+}
+
+.mac-btn-primary:active {
+  transform: scale(0.98);
+}
+
+.mac-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--mac-border);
+}
+
+.mac-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: scale(1.03);
+}
+
+/* ---- Section Spacing ---- */
+.section-wrap {
+  padding: 3rem 0;
+}
+
+/* ---- Notes App ---- */
+.notes-body {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  min-height: 360px;
+}
+
+.notes-sidebar {
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid var(--mac-border-light);
+}
+
+.notes-folder {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 4px;
+  cursor: default;
+  transition: background 0.15s ease;
+}
+
+.notes-folder.active {
+  background: rgba(255, 204, 0, 0.15);
+  color: #FFCC00;
+}
+
+.notes-content {
+  padding: 24px 28px;
+}
+
+.notes-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.notes-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 12px;
+}
+
+.notes-text strong {
+  color: white;
+  font-weight: 600;
+}
+
+.notes-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.notes-card {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--mac-border-light);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform 0.3s var(--spring), border-color 0.2s ease;
+}
+
+.notes-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.notes-card-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+.notes-card strong {
+  font-size: 14px;
+}
+
+.notes-card span:last-child {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+/* ---- Launchpad ---- */
+.launchpad-body {
+  padding: 32px 24px 40px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.launchpad-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 24px 16px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.launchpad-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+  transition: transform 0.35s var(--spring);
+}
+
+.launchpad-app:hover {
+  transform: scale(1.12) translateY(-4px);
+}
+
+.launchpad-app span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+}
+
+.app-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.launchpad-app:hover .app-icon {
+  box-shadow: 0 8px 28px rgba(0, 122, 255, 0.25);
+}
+
+.flutter-icon { background: linear-gradient(135deg, #54C5F8, #01579B); }
+.dart-icon { background: linear-gradient(135deg, #0175C2, #13B9FD); }
+.java-icon { background: linear-gradient(135deg, #E76F00, #5382A1); }
+.frappe-icon { background: linear-gradient(135deg, #0089FF, #0051A2); }
+.api-icon { background: linear-gradient(135deg, #34C759, #007AFF); }
+.html-icon { background: linear-gradient(135deg, #E44D26, #F16529); }
+.css-icon { background: linear-gradient(135deg, #264DE4, #2965F1); }
+.js-icon { background: linear-gradient(135deg, #F7DF1E, #F0DB4F); }
+.mysql-icon { background: linear-gradient(135deg, #00758F, #F29111); }
+.github-icon { background: linear-gradient(135deg, #333, #666); }
+.figma-icon { background: linear-gradient(135deg, #F24E1E, #A259FF); }
+.ux-icon { background: linear-gradient(135deg, #FF2D55, #5856D6); }
+
+/* ---- Finder ---- */
+.finder-body {
+  padding: 0;
+  overflow: hidden;
+}
+
+.finder-table {
+  width: 100%;
+}
+
+.finder-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: 8px 16px;
+  padding: 8px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--mac-border-light);
+  align-items: center;
+}
+
+.finder-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.finder-label,
+.finder-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.finder-svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  opacity: 0.55;
+}
+
+.finder-header {
+  background: rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.finder-header .finder-svg {
+  width: 11px;
+  height: 11px;
+  opacity: 0.35;
+}
+
+.finder-item {
+  cursor: default;
+  transition: background 0.15s ease;
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+
+.finder-item .finder-svg {
+  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.finder-item:hover,
+.finder-item.active {
+  background: rgba(0, 122, 255, 0.12);
+}
+
+.finder-name {
+  gap: 8px;
+}
+
+.finder-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.finder-cell-badge {
+  justify-content: flex-start;
+}
+
+.finder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: rgba(52, 199, 89, 0.15);
+  color: #34C759;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.finder-badge .finder-svg {
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+  color: #34C759;
+}
+
+.experience-detail {
+  padding: 16px 20px 20px;
+  border-top: 1px solid var(--mac-border-light);
+}
+
+.experience-detail h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.experience-detail h3 svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: #007AFF;
+}
+
+.experience-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 640px) {
+  .experience-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 20px;
+  }
+}
+
+.experience-detail li {
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.6);
+  padding-left: 0;
+  position: relative;
+}
+
+.experience-detail li::before {
+  display: none;
+}
+
+.experience-detail li .exp-icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  color: #007AFF;
+  opacity: 0.85;
+}
+
+.experience-detail li .exp-icon svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.section-wrap-compact {
+  padding: 2.5rem 0 4rem;
+}
+
+/* Toolbar icon fix */
+.toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.mac-window-toolbar svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  opacity: 0.55;
+}
+
+.toolbar-path,
+.toolbar-view,
+.toolbar-device {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.toolbar-path {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.work-icon {
+  background: linear-gradient(135deg, #007AFF, #5856D6);
+}
+
+/* ---- iPhone Simulator / Projects ---- */
+.simulator-body {
+  padding: 32px 24px 40px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.simulator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+}
+
+.iphone-device {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.iphone-frame {
+  width: 220px;
+  background: #1a1a1a;
+  border-radius: 36px;
+  padding: 10px;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.08),
+    0 24px 64px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  position: relative;
+  transition: transform 0.4s var(--spring), box-shadow 0.4s ease;
+}
+
+.iphone-device:hover .iphone-frame {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 0 0 2px rgba(0, 122, 255, 0.2),
+    0 32px 80px rgba(0, 122, 255, 0.15);
+}
+
+.iphone-notch {
+  width: 80px;
+  height: 22px;
+  background: #0a0a0a;
+  border-radius: 0 0 14px 14px;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.iphone-screen {
+  border-radius: 28px;
+  overflow: hidden;
+  aspect-ratio: 9 / 19;
+  background: #0f0f0f;
+}
+
+/* ---- Flutter App UIs ---- */
+.app-ui {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 36px 12px 0;
+  font-size: 10px;
+  position: relative;
+}
+
+.app-header {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.salon-header { color: white; }
+
+.app-avatar-sm {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF2D55, #FF9500);
+}
+
+.app-greeting {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 12px;
+}
+
+.app-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.app-stat {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.app-stat strong {
+  display: block;
+  font-size: 16px;
+  color: white;
+}
+
+.app-stat span {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.app-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.app-list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  margin-bottom: 6px;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.app-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.app-dot.pink { background: #FF2D55; }
+.app-dot.blue { background: #007AFF; }
+.app-dot.green { background: #34C759; }
+
+.app-tag {
+  margin-left: auto;
+  font-size: 8px;
+  padding: 2px 6px;
+  background: rgba(0, 122, 255, 0.15);
+  color: #007AFF;
+  border-radius: 999px;
+}
+
+.app-bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 8px 16px;
+  background: rgba(20, 20, 20, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.app-bottom-nav span.active {
+  color: #007AFF;
+  font-weight: 600;
+}
+
+/* Attendance App */
+.attendance-app {
+  background: linear-gradient(180deg, #0a1628 0%, #0f0f0f 100%);
+}
+
+.attendance-header {
+  text-align: center;
+  color: white;
+  justify-content: center;
+}
+
+.face-scan-ring {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.face-scan-inner {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 122, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scan-pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 30px rgba(0, 122, 255, 0.2);
+}
+
+@keyframes scan-pulse {
+  0%, 100% { border-color: rgba(0, 122, 255, 0.4); box-shadow: 0 0 20px rgba(0, 122, 255, 0.15); }
+  50% { border-color: rgba(52, 199, 89, 0.6); box-shadow: 0 0 40px rgba(52, 199, 89, 0.25); }
+}
+
+.face-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.face-scan-ring p {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.geo-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.geo-card strong {
+  display: block;
+  font-size: 10px;
+  color: white;
+}
+
+.geo-card span {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.geo-pin {
+  width: 24px;
+  height: 24px;
+  border-radius: 50% 50% 50% 0;
+  background: #34C759;
+  transform: rotate(-45deg);
+  flex-shrink: 0;
+}
+
+.app-checkin-btn {
+  text-align: center;
+  padding: 12px;
+  background: #007AFF;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 48px;
+}
+
+/* Job Portal App */
+.job-app {
+  background: #0f0f0f;
+}
+
+.app-search-bar {
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 16px;
+}
+
+.job-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.job-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #007AFF, #5856D6);
+  flex-shrink: 0;
+}
+
+.job-logo.orange { background: linear-gradient(135deg, #FF9500, #FF2D55); }
+.job-logo.purple { background: linear-gradient(135deg, #5856D6, #AF52DE); }
+
+.job-card strong {
+  display: block;
+  font-size: 10px;
+  color: white;
+}
+
+.job-card span {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.job-salary {
+  margin-left: auto;
+  font-size: 8px;
+  padding: 3px 8px;
+  background: rgba(52, 199, 89, 0.15);
+  color: #34C759;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Device info below phone */
+.device-info {
+  text-align: center;
+  max-width: 260px;
+}
+
+.device-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.device-info p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.device-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.device-tags span {
+  font-size: 10px;
+  padding: 3px 10px;
+  background: rgba(0, 122, 255, 0.12);
+  border: 1px solid rgba(0, 122, 255, 0.25);
+  border-radius: 999px;
+  color: rgba(0, 122, 255, 0.9);
+}
+
+.device-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* ---- Mail App ---- */
+.mail-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 400px;
+}
+
+.mail-sidebar {
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid var(--mac-border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mail-contact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius);
+  transition: background 0.2s ease, transform 0.2s var(--spring);
+}
+
+.mail-contact:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(4px);
+}
+
+.mail-contact-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 122, 255, 0.12);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.mail-contact strong {
+  display: block;
+  font-size: 13px;
+}
+
+.mail-contact span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.mail-compose {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mail-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--mac-border-light);
+}
+
+.mail-field label {
+  width: 60px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
+.mail-input,
+.mail-input-readonly,
+.mail-textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+
+.mail-input-readonly {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.mail-input::placeholder,
+.mail-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.mail-field-body {
+  flex: 1;
+  align-items: flex-start;
+  border-bottom: none;
+  padding-top: 16px;
+}
+
+.mail-textarea {
+  min-height: 160px;
+  resize: none;
+  line-height: 1.6;
+}
+
+.mail-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 16px;
+}
+
+.mail-status {
+  font-size: 13px;
+}
+
+.mail-status.success { color: #34C759; }
+.mail-status.error { color: #FF453A; }
+
+/* ---- macOS Dock ---- */
+.mac-dock {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 7px 12px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 22px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateX(-50%) translateY(24px);
+}
+
+body.page-ready .mac-dock {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity 0.5s ease 0.5s, transform 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) 0.5s;
+}
+
+.dock-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  transition: transform 0.2s var(--spring);
+  transform-origin: bottom center;
+}
+
+.dock-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.2s ease;
+}
+
+.dock-item:hover .dock-icon {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.dock-item.active::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  position: absolute;
+  bottom: -2px;
+}
+
+.dock-item::before {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s var(--spring);
+}
+
+.dock-item:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.dock-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 4px;
+}
+
+.desktop-dock-icon { background: linear-gradient(135deg, #007AFF, #5856D6); }
+.notes-dock-icon { background: linear-gradient(135deg, #FFCC00, #FF9500); }
+.launchpad-dock-icon { background: linear-gradient(135deg, #5856D6, #AF52DE); }
+.finder-dock-icon { background: linear-gradient(135deg, #007AFF, #5AC8FA); }
+.xcode-dock-icon { background: linear-gradient(135deg, #147EFB, #0066CC); }
+.mail-dock-icon { background: linear-gradient(135deg, #007AFF, #34AADC); }
+.resume-dock-icon { background: linear-gradient(135deg, #FF9500, #FF2D55); }
+.github-dock-icon { background: linear-gradient(135deg, #333, #666); }
+
+/* ---- Scroll Animations ---- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Window open animation class */
+.window-opening {
+  animation: window-open 0.6s var(--spring) forwards;
+}
+
+@keyframes window-open {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .mac-window-hero {
+    width: 90%;
+    left: 5%;
+    top: 5%;
+  }
+
+  .mac-window-terminal {
+    display: none;
+  }
+
+  .hero-grid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-socials {
+    justify-content: center;
+  }
+
+  .notes-body,
+  .mail-body {
+    grid-template-columns: 1fr;
+  }
+
+  .notes-sidebar {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--mac-border-light);
+  }
+
+  .notes-folder {
+    white-space: nowrap;
+    margin-bottom: 0;
+  }
+
+  .finder-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    padding: 10px 12px;
+  }
+
+  .finder-header .finder-cell:nth-child(3),
+  .finder-header .finder-cell:nth-child(4),
+  .finder-item .finder-cell:nth-child(3),
+  .finder-item .finder-cell:nth-child(4) {
+    display: none;
+  }
+
+  .experience-list {
+    grid-template-columns: 1fr;
+  }
+
+  .mac-dock {
+    padding: 4px 6px;
+    gap: 2px;
+    max-width: calc(100vw - 24px);
+    overflow-x: auto;
+  }
+
+  .dock-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .menu-clock {
+    min-width: auto;
+    font-size: 12px;
+  }
+
+  .section-wrap {
+    padding: 2rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .iphone-frame {
+    width: 190px;
+  }
+
+  .launchpad-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 8px;
+  }
+
+  .app-icon {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html { scroll-behavior: auto; }
+
+  .fade-in,
+  .hero-macbook,
+  .floating-window,
+  .mac-dock,
+  .scroll-hint {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .mac-wallpaper {
+    animation: none;
+  }
+}
