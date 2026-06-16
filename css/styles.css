@@ -544,8 +544,8 @@ body.page-ready .mac-window-terminal {
   background: rgba(0, 0, 0, 0.4);
 }
 
-.t-green { color: #34C759; }
-.t-blue { color: #007AFF; }
+.t-green { color: #33CD5E; }
+.t-blue { color: #0A84FF; }
 .t-white { color: rgba(255, 255, 255, 0.9); }
 .t-dim { color: rgba(255, 255, 255, 0.35); }
 
@@ -1497,11 +1497,13 @@ body.page-ready .mac-dock {
 }
 
 .dock-icon {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.2s ease;
+  overflow: hidden;
+  background: transparent;
 }
 
 .dock-item:hover .dock-icon {
@@ -1540,21 +1542,7 @@ body.page-ready .mac-dock {
   transform: translateX(-50%) scale(1);
 }
 
-.dock-divider {
-  width: 1px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.15);
-  margin: 0 4px;
-}
-
-.desktop-dock-icon { background: linear-gradient(135deg, #007AFF, #5856D6); }
-.notes-dock-icon { background: linear-gradient(135deg, #FFCC00, #FF9500); }
-.launchpad-dock-icon { background: linear-gradient(135deg, #5856D6, #AF52DE); }
-.finder-dock-icon { background: linear-gradient(135deg, #007AFF, #5AC8FA); }
-.xcode-dock-icon { background: linear-gradient(135deg, #147EFB, #0066CC); }
-.mail-dock-icon { background: linear-gradient(135deg, #007AFF, #34AADC); }
-.resume-dock-icon { background: linear-gradient(135deg, #FF9500, #FF2D55); }
-.github-dock-icon { background: linear-gradient(135deg, #333, #666); }
+/* Dock app icons defined in macos-theme.css */
 
 /* ---- Scroll Animations ---- */
 .fade-in {
@@ -1652,8 +1640,8 @@ body.page-ready .mac-dock {
   }
 
   .dock-icon {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 
   .menu-clock {

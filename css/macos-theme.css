@@ -1,0 +1,386 @@
+/* ============================================
+   Authentic macOS Dark Mode Theme
+   Colors from macOS Sonoma / Ventura HIG
+   ============================================ */
+
+:root {
+  /* System colors */
+  --mac-system-blue: #0A84FF;
+  --mac-system-blue-hover: #409CFF;
+  --mac-label-primary: rgba(255, 255, 255, 0.85);
+  --mac-label-secondary: rgba(255, 255, 255, 0.55);
+  --mac-label-tertiary: rgba(255, 255, 255, 0.25);
+  --mac-separator: rgba(255, 255, 255, 0.1);
+  --mac-fill-primary: rgba(255, 255, 255, 0.1);
+  --mac-fill-secondary: rgba(255, 255, 255, 0.06);
+
+  /* Window chrome */
+  --mac-window-bg: rgba(40, 40, 40, 0.72);
+  --mac-window-bg-solid: #282828;
+  --mac-titlebar-bg: rgba(60, 60, 60, 0.55);
+  --mac-sidebar-bg: rgba(30, 30, 30, 0.65);
+  --mac-window-radius: 10px;
+
+  /* Traffic lights (macOS exact) */
+  --tl-close: #FF5F57;
+  --tl-minimize: #FEBC2E;
+  --tl-maximize: #28C840;
+  --tl-border: rgba(0, 0, 0, 0.35);
+
+  /* App accent colors */
+  --mac-notes-yellow: #FFCC00;
+  --mac-finder-blue: #1F99F0;
+  --mac-mail-blue: #1D87F0;
+  --mac-launchpad-gray: #8E8E93;
+
+  /* Override legacy tokens */
+  --accent: var(--mac-system-blue);
+  --accent-hover: var(--mac-system-blue-hover);
+  --mac-border: var(--mac-separator);
+  --mac-border-light: rgba(255, 255, 255, 0.06);
+  --bg: #1c1c1e;
+}
+
+body.mac-desktop {
+  font-family: -apple-system, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
+  color: var(--mac-label-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Sonoma-style Wallpaper ---- */
+.mac-wallpaper {
+  background:
+    radial-gradient(ellipse 90% 70% at 75% 15%, rgba(255, 120, 60, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 15% 75%, rgba(90, 60, 200, 0.55) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 80% at 50% 40%, rgba(20, 80, 200, 0.35) 0%, transparent 60%),
+    linear-gradient(160deg, #0d1b3a 0%, #1a0f2e 35%, #2d1b4e 60%, #1a1035 100%);
+  animation: none;
+}
+
+.mac-wallpaper-noise {
+  opacity: 0.015;
+}
+
+/* ---- Menu Bar (authentic) ---- */
+.mac-menu-bar {
+  height: 25px;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.menu-app-name {
+  font-weight: 600;
+}
+
+.menu-item {
+  font-weight: 500;
+  opacity: 0.92;
+}
+
+.menu-item .text-icon {
+  display: none;
+}
+
+.menu-status .text-icon {
+  display: none;
+}
+
+.menu-status {
+  color: var(--mac-label-secondary);
+  font-weight: 400;
+}
+
+.menu-icon svg {
+  opacity: 0.85;
+}
+
+.menu-clock {
+  font-weight: 400;
+  color: var(--mac-label-primary);
+}
+
+/* ---- Windows ---- */
+.mac-window {
+  background: var(--mac-window-bg);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--mac-window-radius);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.4),
+    0 8px 40px rgba(0, 0, 0, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.mac-titlebar {
+  height: 38px;
+  background: var(--mac-titlebar-bg);
+  border-bottom: 0.5px solid var(--mac-separator);
+}
+
+.mac-window-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mac-label-secondary);
+  letter-spacing: -0.01em;
+}
+
+.title-app-icon {
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 3px;
+}
+
+/* Traffic lights — macOS style with border ring */
+.traffic-lights span {
+  width: 12px;
+  height: 12px;
+  box-shadow: inset 0 0 0 0.5px var(--tl-border);
+}
+
+.tl-close { background: var(--tl-close); }
+.tl-minimize { background: var(--tl-minimize); }
+.tl-maximize { background: var(--tl-maximize); }
+
+/* ---- Dock (authentic glass) ---- */
+.mac-dock {
+  padding: 4px 6px 6px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 0.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.dock-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: transparent;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.35),
+    0 0 0 0.5px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.dock-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dock-divider {
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 2px;
+}
+
+.dock-item.active::after {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* ---- macOS App Icon Shape (squircle) ---- */
+.app-icon {
+  border-radius: 11px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Authentic app icon backgrounds */
+.flutter-icon { background: linear-gradient(180deg, #54C5F8 0%, #01579B 100%); }
+.dart-icon { background: linear-gradient(180deg, #00B4DB 0%, #005A8C 100%); }
+.java-icon { background: linear-gradient(180deg, #E8892D 0%, #5382A1 100%); }
+.frappe-icon { background: linear-gradient(180deg, #0089FF 0%, #004488 100%); }
+.api-icon { background: linear-gradient(180deg, #5AC8FA 0%, #007AFF 100%); }
+.html-icon { background: linear-gradient(180deg, #E44D26 0%, #C0392B 100%); }
+.css-icon { background: linear-gradient(180deg, #264DE4 0%, #1a3aa8 100%); }
+.js-icon { background: linear-gradient(180deg, #F7DF1E 0%, #D4B800 100%); }
+.mysql-icon { background: linear-gradient(180deg, #00758F 0%, #F29111 100%); }
+.github-icon { background: linear-gradient(180deg, #555 0%, #24292e 100%); }
+.figma-icon { background: linear-gradient(180deg, #F24E1E 0%, #A259FF 100%); }
+.ux-icon { background: linear-gradient(180deg, #FF2D55 0%, #5856D6 100%); }
+
+/* ---- Notes App (authentic yellow sidebar) ---- */
+.notes-sidebar {
+  background: var(--mac-sidebar-bg);
+}
+
+.notes-folder.active {
+  background: rgba(255, 204, 0, 0.12);
+  color: var(--mac-notes-yellow);
+}
+
+.notes-card-icon {
+  background: rgba(10, 132, 255, 0.12);
+  border-color: rgba(10, 132, 255, 0.2);
+  color: var(--mac-system-blue);
+}
+
+/* ---- Finder ---- */
+.finder-header {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.finder-item.active {
+  background: rgba(10, 132, 255, 0.18);
+}
+
+.work-icon {
+  background: linear-gradient(180deg, #5AC8FA 0%, var(--mac-finder-blue) 100%);
+  border-radius: 3px;
+}
+
+/* ---- Buttons ---- */
+.mac-btn-primary {
+  background: var(--mac-system-blue);
+  box-shadow: none;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.mac-btn-primary:hover {
+  background: var(--mac-system-blue-hover);
+  box-shadow: none;
+}
+
+.mac-btn-secondary {
+  background: var(--mac-fill-primary);
+  border: 0.5px solid var(--mac-separator);
+  border-radius: 6px;
+}
+
+/* ---- Mail sidebar ---- */
+.mail-sidebar {
+  background: var(--mac-sidebar-bg);
+}
+
+.mail-contact-icon {
+  background: rgba(10, 132, 255, 0.1);
+  border-radius: 8px;
+}
+
+.mail-contact-icon svg {
+  color: var(--mac-system-blue);
+}
+
+/* ---- Desktop icons (macOS style) ---- */
+.desktop-icon-img {
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.projects-icon {
+  background: linear-gradient(180deg, #5AC8FA 0%, #007AFF 100%);
+  position: relative;
+}
+
+.resume-icon {
+  background: linear-gradient(180deg, #fff 0%, #e8e8e8 100%);
+  position: relative;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.desktop-icon:hover {
+  opacity: 0.85;
+}
+
+.mac-folder-icon,
+.mac-doc-icon {
+  width: 48px;
+  height: 48px;
+  background: none !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.mac-folder-icon svg,
+.mac-doc-icon svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.title-app-icon svg {
+  width: 16px;
+  height: 16px;
+  opacity: 1;
+}
+
+/* ---- Text colors ---- */
+.notes-text,
+.hero-desc,
+.finder-item,
+.experience-detail li,
+.device-info p,
+.mail-contact span {
+  color: var(--mac-label-secondary);
+}
+
+.section-label,
+.finder-badge {
+  color: #30D158;
+}
+
+.finder-badge {
+  background: rgba(48, 209, 88, 0.15);
+}
+
+/* ---- MacBook screen wallpaper inside ---- */
+.macbook-screen {
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(255,120,60,0.3), transparent),
+    radial-gradient(ellipse at 20% 80%, rgba(90,60,200,0.4), transparent),
+    linear-gradient(160deg, #0d1b3a, #1a1035);
+}
+
+.text-apple-blue,
+.menu-item:hover,
+.hero-role .text-apple-blue {
+  color: var(--mac-system-blue) !important;
+}
+
+.experience-detail li .exp-icon,
+.experience-detail h3 svg,
+.device-info h3 svg,
+.notes-card-icon {
+  color: var(--mac-system-blue);
+}
+
+.device-tags span {
+  background: rgba(10, 132, 255, 0.12);
+  border-color: rgba(10, 132, 255, 0.25);
+  color: var(--mac-system-blue);
+}
+
+/* Hide generic gradient dock classes */
+.desktop-dock-icon,
+.notes-dock-icon,
+.launchpad-dock-icon,
+.finder-dock-icon,
+.xcode-dock-icon,
+.mail-dock-icon,
+.resume-dock-icon,
+.github-dock-icon {
+  background: none;
+}

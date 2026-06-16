@@ -187,7 +187,7 @@ const sectionObserver = new IntersectionObserver(
         });
 
         menuItems.forEach((link) => {
-          link.style.color = link.getAttribute('href') === `#${id}` ? '#007AFF' : '';
+          link.style.color = link.getAttribute('href') === `#${id}` ? '#0A84FF' : '';
         });
       }
     });
