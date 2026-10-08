@@ -268,7 +268,6 @@ function showFormStatus(text, type) {
   formStatus.classList.remove('hidden', 'success', 'error');
   formStatus.classList.add(type);
 }
-
 // ---- Notes Folder Tabs ----
 document.querySelectorAll('.notes-folder').forEach((folder) => {
   folder.addEventListener('click', () => {
@@ -277,3 +276,4 @@ document.querySelectorAll('.notes-folder').forEach((folder) => {
     animate(folder, { scale: [1, 1.04, 1] }, { duration: 0.25 });
   });
 });
+
