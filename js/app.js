@@ -739,7 +739,7 @@
   }
 
   slider.addEventListener('pointerdown', (e) => {
-    if (isPhone() || e.button !== 0) return;
+    if (e.button !== 0) return;
     e.stopPropagation();
     slide = { x: e.clientX, dx: 0, max: sliderMax() };
     try { slider.setPointerCapture(e.pointerId); } catch { /* keep dragging without capture */ }

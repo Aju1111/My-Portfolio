@@ -1675,3 +1675,21 @@ html.ios .br-main { height: 240px; }
 :root[data-theme="light"] .ios-hero-sub { color: #374151; opacity: 1; }
 :root[data-theme="light"] .ios-hero-head .avatar { box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgba(0, 0, 0, .06), 0 6px 16px -6px rgba(0, 0, 0, .25); }
 .ios-home > * { flex-shrink: 0; }
+
+/* Phones: lock screen matches the desktop (avatar, name, slide-to-open) */
+html .lock .lock-bottom .avatar { display: grid; width: 64px; height: 64px; font-size: 24px; }
+html .lock .lock-bottom .lock-name { display: block; }
+html .lock .lock-bottom .lock-enter {
+  width: min(300px, 82vw); height: 54px; padding: 5px;
+  background: rgba(255, 255, 255, .16);
+  box-shadow: inset 0 0 0 .5px rgba(255, 255, 255, .32), 0 10px 30px -12px rgba(0, 0, 0, .35);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  cursor: grab;
+}
+html .lock .lock-bottom .ls-knob { display: grid; }
+html .lock .lock-bottom .lock-hint-mac { display: block; }
+html .lock .lock-bottom .lock-hint-ios { display: none; }
+html .lock .lock-enter { --track: min(300px, 82vw); }
+:root[data-theme="light"] .lock .lock-enter { background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .08), 0 10px 30px -12px rgba(0, 0, 0, .2); }
+:root[data-theme="light"] .lock .ls-text { background-image: linear-gradient(100deg, rgba(29, 29, 31, .45) 35%, #1d1d1f 50%, rgba(29, 29, 31, .45) 65%); }
+html .lock .lock-homebar { display: none; }
