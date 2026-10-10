@@ -43,6 +43,7 @@
     <symbol id="g-apple" viewBox="0 0 24 24"><path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></symbol>
     <symbol id="g-toggles" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="7" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="7.5" r="2" fill="currentColor"/><rect x="2.5" y="13" width="19" height="7" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6.5" cy="16.5" r="2" fill="currentColor"/></symbol>
     <symbol id="g-wifi" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4.5c3.9 0 7.4 1.5 10 4l-1.6 1.7A11.9 11.9 0 0012 6.9c-3.3 0-6.3 1.3-8.4 3.3L2 8.5c2.6-2.5 6.1-4 10-4zm0 4.8c2.6 0 4.9 1 6.6 2.6L17 13.6a7.2 7.2 0 00-10 0l-1.6-1.7A9.5 9.5 0 0112 9.3zm0 4.8c1.3 0 2.4.5 3.3 1.3L12 19l-3.3-3.6a4.8 4.8 0 013.3-1.3z"/></symbol>
+    <symbol id="g-lock" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a5 5 0 015 5v3h1a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8a2 2 0 012-2h1V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v3h6V7a3 3 0 00-3-3zm0 9.5a1.75 1.75 0 00-1 3.2V18.5h2v-1.8a1.75 1.75 0 00-1-3.2z"/></symbol>
     <symbol id="g-copy" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M9 9h10a1 1 0 011 1v10a1 1 0 01-1 1H9a1 1 0 01-1-1V10a1 1 0 011-1zM5 15H4a1 1 0 01-1-1V4a1 1 0 011-1h10a1 1 0 011 1v1"/></symbol>
     <symbol id="g-arrow-r" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8 12h8m-3.5-3.5L16 12l-3.5 3.5"/></symbol>
     <symbol id="g-bolt" viewBox="0 0 24 24"><path fill="currentColor" d="M13 2L4.5 13.5H11L10 22l8.5-11.5H12z"/></symbol>
@@ -109,86 +110,151 @@
   <!-- ===================== macOS desktop ===================== -->
   <main class="desktop" aria-label="Desktop">
     <div class="widgets">
-
-      <section class="widget w-hero">
-        <div class="hero-head">
-          <div class="avatar avatar-lg">
-            <img src="assets/profile.jpg" alt="" onerror="this.remove()">
-            <span>MP</span>
+      <div class="wcol wcol-main">
+        <section class="widget w-hero">
+          <div class="hero-head">
+            <div class="avatar avatar-lg hero-avatar">
+              <img src="assets/profile.jpg" alt="" onerror="this.remove()">
+              <span>MP</span>
+            </div>
+            <div>
+              <p class="hero-hello">Hello, I'm</p>
+              <h1 class="hero-name">Muhsin PA</h1>
+            </div>
           </div>
-          <div>
-            <p class="hero-hello">Hello, I'm</p>
-            <h1 class="hero-name">Muhsin PA</h1>
+          <p class="hero-role"><span class="hero-grad">Flutter &amp; Vue.js Developer</span> <span class="hero-dot">·</span> Frappe/ERPNext</p>
+          <p class="hero-desc">Building mobile &amp; web applications at Cloud Native IT Solutions — Flutter apps and a Vue.js web CRM for ERP, CRM, HR, salon, garage, tailoring and food delivery businesses.</p>
+          <div class="hero-stats">
+            <div><b>2+</b><span>Years experience</span></div>
+            <div><b>7</b><span>Apps built</span></div>
+            <div><b>4</b><span>Platforms</span><small class="stat-sub">Android · iOS · Web · Windows</small></div>
+          </div>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-blue">View Projects</a>
+            <a href="#about" class="btn btn-glass">About Me</a>
+            <a href="#contact" class="btn btn-glass">Contact</a>
+            <a href="#resume" class="btn btn-glass btn-icon" aria-label="Resume"><svg><use href="#g-doc"/></svg>Resume</a>
+          </div>
+        </section>
+
+        <div class="widget w-clock" aria-label="World clock">
+          <svg class="clock-face" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="48" class="cf-bg"/>
+            <g class="cf-ticks"></g>
+            <g class="cf-nums" font-family="inherit" font-size="11" font-weight="600" text-anchor="middle">
+              <text x="50" y="18">12</text><text x="85" y="54">3</text><text x="50" y="90">6</text><text x="15" y="54">9</text>
+            </g>
+            <line class="cf-h" x1="50" y1="50" x2="50" y2="28"/>
+            <line class="cf-m" x1="50" y1="50" x2="50" y2="16"/>
+            <line class="cf-s" x1="50" y1="58" x2="50" y2="12"/>
+            <circle cx="50" cy="50" r="2.6" class="cf-pin"/>
+          </svg>
+          <div class="clock-meta">
+            <p class="w-day" data-clock="day"></p>
+            <p class="w-date" data-clock="date"></p>
+          </div>
+          <div class="world">
+            <div class="world-city"><span>Thrissur, India</span><b data-tz="Asia/Kolkata"></b><small>Home</small></div>
+            <div class="world-city"><span>Dubai, UAE</span><b data-tz="Asia/Dubai"></b><small>Work</small></div>
           </div>
         </div>
-        <p class="hero-role">Flutter <span>&amp;</span> Vue.js Developer <span>·</span> Frappe/ERPNext</p>
-        <p class="hero-desc">Building mobile &amp; web applications at Cloud Native IT Solutions — cross-platform Flutter apps for ERP, CRM, HR, salon, garage, tailoring and food delivery businesses.</p>
-        <div class="hero-stats">
-          <div><b>2+</b><span>Years experience</span></div>
-          <div><b>6</b><span>Apps built</span></div>
-          <div><b>Android</b><span>&amp; iOS</span></div>
-        </div>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-blue">View Projects</a>
-          <a href="#about" class="btn btn-glass">About Me</a>
-          <a href="#contact" class="btn btn-glass">Contact</a>
-        </div>
-      </section>
-
-      <a href="#experience" class="widget w-now">
-        <p class="w-label"><svg><use href="#g-briefcase"/></svg>Currently <span class="w-live"><i></i>Now</span></p>
-        <p class="w-title">Flutter &amp; Vue.js Developer</p>
-        <p class="w-sub">Cloud Native IT Solutions</p>
-        <div class="w-tags">
-          <span><svg><use href="#t-flutter"/></svg>Flutter</span>
-          <span><svg><use href="#t-vue"/></svg>Vue.js</span>
-          <span><svg><use href="#t-frappe"/></svg>Frappe/ERPNext</span>
-        </div>
-        <p class="w-foot"><svg><use href="#g-pin"/></svg>Dubai, UAE · Since Sep 2025</p>
-      </a>
-
-      <a href="#project-ibs-erp" class="widget w-featured">
-        <p class="w-label"><svg><use href="#g-apps"/></svg>Featured App</p>
-        <div class="w-app">
-          <span class="icon" style="--g: linear-gradient(160deg,#5BE49B,#16A34A)"><svg><use href="#g-faceid"/></svg></span>
-          <div>
-            <p class="w-title">IBS ERP – ALD App</p>
-            <p class="w-sub">Face-verified GPS check-in</p>
-          </div>
-        </div>
-        <span class="w-cta">Open <svg><use href="#g-chev-r"/></svg></span>
-      </a>
-
-      <div class="widget w-clock" aria-label="Clock">
-        <p class="w-day" data-clock="day"></p>
-        <p class="w-time" data-clock="time"></p>
-        <p class="w-date" data-clock="date"></p>
       </div>
 
-      <a href="#skills" class="widget w-stack">
-        <p class="w-label"><svg><use href="#g-gear"/></svg>Tech Stack</p>
-        <div class="stack-row">
-          <span class="icon icon-sm" style="--g: linear-gradient(160deg,#5CD0FF,#0175C2)" title="Flutter"><svg><use href="#t-flutter"/></svg></span>
-          <span class="icon icon-sm" style="--g: linear-gradient(160deg,#3DD2F5,#0A7ABF)" title="Dart"><svg><use href="#t-dart"/></svg></span>
-          <span class="icon icon-sm" style="--g: linear-gradient(160deg,#5EEAA8,#16A34A)" title="Vue.js"><svg><use href="#t-vue"/></svg></span>
-          <span class="icon icon-sm" style="--g: linear-gradient(160deg,#60A5FA,#1D4ED8)" title="Frappe / ERPNext"><svg><use href="#t-frappe"/></svg></span>
-          <span class="icon icon-sm" style="--g: linear-gradient(160deg,#FCD34D,#F97316)" title="Firebase"><svg><use href="#t-firebase"/></svg></span>
-          <span class="icon icon-sm" style="--g: linear-gradient(160deg,#38BDF8,#0E7490)" title="MySQL &amp; Hive"><svg><use href="#t-db"/></svg></span>
-        </div>
-      </a>
+      <div class="wcol wcol-side">
+        <a href="#experience" class="widget w-now">
+          <p class="w-label"><svg><use href="#g-briefcase"/></svg>Currently <span class="w-live"><i></i>Now</span></p>
+          <p class="w-title">Flutter &amp; Vue.js Developer</p>
+          <p class="w-sub">Cloud Native IT Solutions</p>
+          <div class="w-tags">
+            <span><svg><use href="#t-flutter"/></svg>Flutter</span>
+            <span><svg><use href="#t-vue"/></svg>Vue.js</span>
+            <span><svg><use href="#t-frappe"/></svg>Frappe/ERPNext</span>
+          </div>
+          <p class="w-foot"><svg><use href="#g-pin"/></svg>Dubai, UAE · Since Sep 2025</p>
+        </a>
+
+        <a href="#project-ibs-erp" class="widget w-featured">
+          <p class="w-label"><svg><use href="#g-apps"/></svg>Featured App</p>
+          <div class="w-app">
+            <span class="icon" style="--g: linear-gradient(160deg,#5BE49B,#16A34A)"><svg><use href="#g-faceid"/></svg></span>
+            <div>
+              <p class="w-title">IBS ERP – ALD App</p>
+              <p class="w-sub">Face-verified GPS check-in</p>
+            </div>
+          </div>
+          <div class="w-tags">
+            <span>Face AI</span><span>Geofencing</span><span>Offline sync</span>
+          </div>
+          <p class="w-foot">Android · iOS · Windows</p>
+          <span class="w-cta">Open <svg><use href="#g-chev-r"/></svg></span>
+        </a>
+      </div>
     </div>
 
     <div class="desk-icons">
-      <a href="#resume" class="desk-icon">
-        <span class="file-icon"><svg viewBox="0 0 48 60"><path d="M4 2h28l14 14v40a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z" fill="#fff"/><path d="M32 2v12a2 2 0 002 2h12" fill="#dfe3ea"/><rect x="10" y="38" width="28" height="12" rx="3" fill="#E5484D"/><text x="24" y="47" text-anchor="middle" font-size="8" font-weight="700" fill="#fff" font-family="Inter,system-ui">PDF</text><path d="M10 22h24M10 28h24M10 33h16" stroke="#cdd3dc" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <a href="#resume" class="desk-icon" title="Resume.pdf — PDF document">
+        <span class="file-icon">
+          <svg viewBox="0 0 52 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="di-page" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f1f3f7"/></linearGradient>
+            </defs>
+            <path d="M7 2h27l16 16v40a4 4 0 01-4 4H7a4 4 0 01-4-4V6a4 4 0 014-4z" fill="url(#di-page)"/>
+            <path d="M34 2v12a4 4 0 004 4h12z" fill="#dfe3ea"/>
+            <!-- mini CV preview -->
+            <rect x="11" y="9" width="18" height="3" rx="1.2" fill="#1d1d1f"/>
+            <rect x="14" y="14" width="12" height="1.6" rx=".8" fill="#8e95a3"/>
+            <rect x="9" y="18.5" width="34" height=".8" fill="#1d1d1f" opacity=".7"/>
+            <rect x="9" y="22" width="11" height="1.6" rx=".8" fill="#3a3f4a"/>
+            <rect x="9" y="25" width="34" height="1.2" rx=".6" fill="#d3d8e0"/>
+            <rect x="9" y="27.6" width="30" height="1.2" rx=".6" fill="#d3d8e0"/>
+            <rect x="9" y="31.5" width="13" height="1.6" rx=".8" fill="#3a3f4a"/>
+            <rect x="11" y="34.5" width="30" height="1.2" rx=".6" fill="#d3d8e0"/>
+            <rect x="11" y="37.1" width="26" height="1.2" rx=".6" fill="#d3d8e0"/>
+            <rect x="11" y="39.7" width="28" height="1.2" rx=".6" fill="#d3d8e0"/>
+            <rect x="9" y="46" width="22" height="11" rx="3" fill="#E5484D"/>
+            <text x="20" y="54" text-anchor="middle" font-size="7.5" font-weight="800" fill="#fff" font-family="Inter,system-ui,sans-serif" letter-spacing=".4">PDF</text>
+          </svg>
+        </span>
         <span class="desk-label">Resume.pdf</span>
       </a>
-      <a href="#projects" class="desk-icon">
-        <span class="file-icon"><svg viewBox="0 0 60 48"><path d="M2 8a4 4 0 014-4h16l5 5h27a4 4 0 014 4v29a4 4 0 01-4 4H6a4 4 0 01-4-4z" fill="#1F8FEA"/><path d="M2 15a4 4 0 014-4h48a4 4 0 014 4v27a4 4 0 01-4 4H6a4 4 0 01-4-4z" fill="#5AB8FA"/></svg></span>
+      <a href="#projects" class="desk-icon" title="Projects — 7 apps">
+        <span class="file-icon">
+          <svg viewBox="0 0 64 52" aria-hidden="true">
+            <defs>
+              <linearGradient id="di-back" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D9BF0"/><stop offset="1" stop-color="#1E7BDC"/></linearGradient>
+              <linearGradient id="di-front" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CCBFF"/><stop offset="1" stop-color="#44A8F7"/></linearGradient>
+            </defs>
+            <path d="M3 9a5 5 0 015-5h15.5a4 4 0 012.8 1.2L30 9h26a5 5 0 015 5v31a5 5 0 01-5 5H8a5 5 0 01-5-5z" fill="url(#di-back)"/>
+            <path d="M3 17a5 5 0 015-5h48a5 5 0 015 5v28a5 5 0 01-5 5H8a5 5 0 01-5-5z" fill="url(#di-front)"/>
+            <path d="M3 17a5 5 0 015-5h48a5 5 0 015 5" fill="none" stroke="#ffffff" stroke-opacity=".55" stroke-width=".8"/>
+            <!-- embossed apps symbol -->
+            <g fill="#1F6FC4" opacity=".42">
+              <rect x="24" y="21" width="7" height="7" rx="2"/><rect x="33" y="21" width="7" height="7" rx="2"/>
+              <rect x="24" y="30" width="7" height="7" rx="2"/><rect x="33" y="30" width="7" height="7" rx="2"/>
+            </g>
+          </svg>
+          <span class="desk-badge">7</span>
+        </span>
         <span class="desk-label">Projects</span>
       </a>
-      <a href="#contact" class="desk-icon">
-        <span class="file-icon"><svg viewBox="0 0 48 60"><path d="M4 2h28l14 14v40a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z" fill="#fff"/><path d="M32 2v12a2 2 0 002 2h12" fill="#dfe3ea"/><circle cx="24" cy="30" r="7" fill="#8E8E93"/><path d="M12 50c1.5-6 6.5-9 12-9s10.5 3 12 9z" fill="#8E8E93"/></svg></span>
+      <a href="#contact" class="desk-icon" title="Contact.vcf — contact card">
+        <span class="file-icon">
+          <svg viewBox="0 0 64 48" aria-hidden="true">
+            <defs>
+              <linearGradient id="di-card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef1f6"/></linearGradient>
+              <linearGradient id="di-av" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6AC8FF"/><stop offset="1" stop-color="#0A6CFF"/></linearGradient>
+            </defs>
+            <rect x="3" y="4" width="58" height="40" rx="6" fill="url(#di-card)"/>
+            <rect x="3" y="4" width="58" height="9" rx="6" fill="#e3e7ee"/>
+            <rect x="3" y="9" width="58" height="4" fill="#e3e7ee"/>
+            <circle cx="18" cy="28" r="9" fill="url(#di-av)"/>
+            <text x="18" y="31.2" text-anchor="middle" font-size="8" font-weight="800" fill="#fff" font-family="Inter,system-ui,sans-serif">MP</text>
+            <rect x="31" y="21" width="22" height="3.2" rx="1.6" fill="#1d1d1f"/>
+            <rect x="31" y="27" width="17" height="2" rx="1" fill="#9aa1ad"/>
+            <rect x="31" y="31.5" width="20" height="2" rx="1" fill="#c9ced8"/>
+            <rect x="31" y="36" width="14" height="2" rx="1" fill="#c9ced8"/>
+          </svg>
+        </span>
         <span class="desk-label">Contact.vcf</span>
       </a>
     </div>
@@ -278,13 +344,31 @@
         </div>
 
         <h2 class="group-label">Details</h2>
-        <dl class="group group-list">
-          <div class="row"><dt>Role</dt><dd>Flutter &amp; Vue.js Developer · Frappe/ERPNext</dd></div>
-          <div class="row"><dt>Company</dt><dd>Cloud Native IT Solutions · Dubai, UAE</dd></div>
-          <div class="row"><dt>Experience</dt><dd>2+ years</dd></div>
-          <div class="row"><dt>Location</dt><dd>Thrissur, Kerala, India</dd></div>
-          <div class="row"><dt>Education</dt><dd>BCA · University of Calicut (2021 – 2024)</dd></div>
-          <div class="row"><dt>Career goal</dt><dd>Lead mobile architecture, mentor teams &amp; ship products at scale</dd></div>
+        <dl class="details">
+          <div class="detail detail-wide">
+            <span class="icon" style="--g: linear-gradient(160deg,#5CD0FF,#0175C2)"><svg><use href="#t-flutter"/></svg></span>
+            <div><dt>Role</dt><dd>Flutter &amp; Vue.js Developer · Frappe/ERPNext</dd></div>
+          </div>
+          <div class="detail">
+            <span class="icon" style="--g: linear-gradient(160deg,#6AC8FF,#0A6CFF)"><svg><use href="#g-briefcase"/></svg></span>
+            <div><dt>Company</dt><dd>Cloud Native IT Solutions · Dubai, UAE</dd></div>
+          </div>
+          <div class="detail">
+            <span class="icon" style="--g: linear-gradient(160deg,#FFC94D,#FF8A00)"><svg><use href="#g-bolt"/></svg></span>
+            <div><dt>Experience</dt><dd>2+ years</dd></div>
+          </div>
+          <div class="detail">
+            <span class="icon" style="--g: linear-gradient(160deg,#4ADE80,#15803D)"><svg><use href="#g-pin"/></svg></span>
+            <div><dt>Location</dt><dd>Thrissur, Kerala, India</dd></div>
+          </div>
+          <div class="detail">
+            <span class="icon" style="--g: linear-gradient(160deg,#C084FC,#7C3AED)"><svg><use href="#g-doc"/></svg></span>
+            <div><dt>Education</dt><dd>BCA · University of Calicut (2021 – 2024)</dd></div>
+          </div>
+          <div class="detail detail-wide detail-goal">
+            <span class="icon" style="--g: linear-gradient(160deg,#FF8AC4,#E2287A)"><svg><use href="#g-apps"/></svg></span>
+            <div><dt>Career goal</dt><dd>Lead mobile &amp; web architecture, mentor teams &amp; ship products at scale</dd></div>
+          </div>
         </dl>
 
         <div class="group group-list">
@@ -321,9 +405,9 @@
           <div>
             <h2 class="group-label">Architecture &amp; UI</h2>
             <ul class="group group-list">
-              <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#94A3B8,#334155)"><svg><use href="#g-cube"/></svg></span><span class="row-main">MVVM</span><span class="row-detail">Clean &amp; maintainable</span></li>
+              <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#94A3B8,#334155)"><svg><use href="#g-cube"/></svg></span><span class="row-main">MVVM · Clean Architecture</span><span class="row-detail">Maintainable code</span></li>
               <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#6AC8FF,#0A6CFF)"><svg><use href="#g-apps"/></svg></span><span class="row-main">Material Design</span><span class="row-detail">Flutter widgets</span></li>
-              <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#FDA4AF,#E11D48)"><svg><use href="#t-layers"/></svg></span><span class="row-main">Custom UI components</span><span class="row-detail">Reusable widgets</span></li>
+              <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#FDA4AF,#E11D48)"><svg><use href="#t-layers"/></svg></span><span class="row-main">Custom UI Components</span><span class="row-detail">Responsive layouts</span></li>
             </ul>
           </div>
           <div>
@@ -333,15 +417,17 @@
               <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#4ADE80,#059669)"><svg><use href="#t-api"/></svg></span><span class="row-main">REST APIs · Dio</span><span class="row-detail">Auth &amp; JSON</span></li>
               <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#FCD34D,#F97316)"><svg><use href="#t-firebase"/></svg></span><span class="row-main">Firebase</span><span class="row-detail">Push notifications</span></li>
               <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#38BDF8,#0E7490)"><svg><use href="#t-db"/></svg></span><span class="row-main">MySQL</span><span class="row-detail">Databases</span></li>
-              <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#FDE047,#CA8A04)"><svg><use href="#t-db"/></svg></span><span class="row-main">Hive</span><span class="row-detail">Offline-first storage</span></li>
+              <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#FDE047,#CA8A04)"><svg><use href="#t-db"/></svg></span><span class="row-main">Hive</span><span class="row-detail">Offline-first &amp; auto-sync</span></li>
+              <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#A1A1A6,#3A3A3C)"><svg><use href="#g-lock"/></svg></span><span class="row-main">Authentication</span><span class="row-detail">JWT &amp; secure storage</span></li>
             </ul>
           </div>
           <div>
             <h2 class="group-label">Device Features &amp; Integrations</h2>
             <ul class="group group-list">
-              <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#4ADE80,#15803D)"><svg><use href="#g-pin"/></svg></span><span class="row-main">GPS &amp; Geofencing</span><span class="row-detail">Location services</span></li>
+              <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#4ADE80,#15803D)"><svg><use href="#g-pin"/></svg></span><span class="row-main">GPS, Geolocation &amp; Geofencing</span><span class="row-detail">Location services</span></li>
               <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#A1A1A6,#3A3A3C)"><svg><use href="#g-camera"/></svg></span><span class="row-main">Camera &amp; File Uploads</span><span class="row-detail">Photos, documents</span></li>
               <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#4B5563,#111827)"><svg><use href="#g-qr"/></svg></span><span class="row-main">QR Code Scanning</span><span class="row-detail">Generate &amp; scan</span></li>
+              <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#5BE49B,#16A34A)"><svg><use href="#g-faceid"/></svg></span><span class="row-main">Face Recognition</span><span class="row-detail">Attendance check-in</span></li>
               <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#60A5FA,#1E3A8A)"><svg><use href="#g-card"/></svg></span><span class="row-main">Razorpay</span><span class="row-detail">Payments</span></li>
               <li class="row"><span class="icon icon-row" style="--g: linear-gradient(160deg,#6EE7B7,#0D9488)"><svg><use href="#g-map"/></svg></span><span class="row-main">Google Maps</span><span class="row-detail">Live tracking</span></li>
             </ul>
@@ -382,12 +468,17 @@
                 <span class="badge badge-green">Current</span>
               </header>
               <ul class="checklist">
-                <li><svg><use href="#g-check"/></svg>Developed and maintained cross-platform Flutter applications for ERP, CRM, HR, salon, garage, tailoring and food delivery business workflows across Android and iOS</li>
-                <li><svg><use href="#g-check"/></svg>Built key features including Razorpay payment integration, Google Maps integration, real-time delivery tracking, location-based services, subscriptions and order management</li>
-                <li><svg><use href="#g-check"/></svg>Integrated Frappe/ERPNext REST APIs using Dio and implemented authentication, role-based access, dynamic forms, dashboards and data-driven features</li>
-                <li><svg><use href="#g-check"/></svg>Built reusable UI and service components and implemented offline-first functionality with Hive, including offline attendance and billing with automatic sync when connectivity is restored</li>
+                <li><svg><use href="#g-check"/></svg>Built and maintained 6 cross-platform Flutter apps and a Vue.js web CRM for ERP, CRM, HR, salon, garage, tailoring and food delivery businesses — shipped on Android and iOS, and Windows for IBS ERP</li>
+                <li><svg><use href="#g-check"/></svg>Integrated Frappe/ERPNext and HRMS REST APIs with Dio and the Frappe SDK, with OAuth2, session and JWT authentication, role-based access, dynamic forms, workflow actions and KPI dashboards</li>
+                <li><svg><use href="#g-check"/></svg>Implemented on-device face verification (TensorFlow Lite + Google ML Kit) with GPS geofencing for attendance check-in</li>
+                <li><svg><use href="#g-check"/></svg>Built offline-first features with Hive — a sync queue for check-ins, documents and workflow actions, plus offline billing — that syncs automatically when connectivity is restored</li>
+                <li><svg><use href="#g-check"/></svg>Delivered Razorpay payments, Google Maps, Google Sign-In, OTP login, subscriptions, real-time order tracking and QR code gate passes</li>
+                <li><svg><use href="#g-check"/></svg>Developed a CRM web app with Vue 3, TypeScript, Pinia, Tailwind CSS and Frappe UI — leads, opportunities, campaigns and sales pipeline analytics</li>
+                <li><svg><use href="#g-check"/></svg>Followed MVVM with Provider and GetX, built reusable UI and service components, and added multi-language support (English, Arabic, Hindi, Malayalam, Urdu)</li>
               </ul>
-              <div class="chips"><span>Flutter</span><span>Dart</span><span>Vue.js</span><span>Frappe/ERPNext</span><span>Dio</span><span>Hive</span><span>Razorpay</span><span>Google Maps</span></div>
+              <div class="chips"><span>Flutter</span><span>Dart</span><span>Vue.js</span><span>TypeScript</span><span>Frappe/ERPNext</span><span>Dio</span><span>Provider</span><span>GetX</span><span>Hive</span><span>TensorFlow Lite</span><span>ML Kit</span><span>Razorpay</span><span>Google Maps</span></div>
+              <p class="job-apps-label">Apps built here</p>
+              <div class="job-apps" id="job-apps"></div>
             </article>
           </li>
           <li class="tl-item">
@@ -430,7 +521,7 @@
       <!-- ===== PROJECTS (App Store style) — app list and project pages are built from js/projects.js ===== -->
       <section class="page" data-page="projects" data-title="Projects" data-app="projects">
         <h1 class="large-title">Projects</h1>
-        <p class="page-lead">Apps I've built with Flutter at Cloud Native IT Solutions. Open one to see its page.</p>
+        <p class="page-lead">Apps I've built with Flutter and Vue.js at Cloud Native IT Solutions. Open one to see its page.</p>
 
         <a href="#project-ibs-erp" class="today-card">
           <div class="today-text">
@@ -514,9 +605,8 @@
     <div class="cc-tile cc-wide">
       <p class="cc-label">Appearance</p>
       <div class="segmented" role="radiogroup" aria-label="Appearance">
-        <button role="radio" data-theme-set="auto" aria-checked="true">Auto</button>
         <button role="radio" data-theme-set="light" aria-checked="false">Light</button>
-        <button role="radio" data-theme-set="dark" aria-checked="false">Dark</button>
+        <button role="radio" data-theme-set="dark" aria-checked="true">Dark</button>
       </div>
     </div>
     <div class="cc-tile cc-wide">
@@ -528,8 +618,6 @@
         <button role="radio" class="swatch sw-graphite" data-wall-set="graphite" aria-label="Graphite" aria-checked="false"></button>
       </div>
     </div>
-    <button class="cc-tile cc-btn" data-cmd="copy-email"><span class="cc-round"><svg><use href="#g-copy"/></svg></span><span><b>Copy email</b><small>Paste it anywhere</small></span></button>
-    <a class="cc-tile cc-btn" href="assets/resume.pdf" download><span class="cc-round"><svg><use href="#g-download"/></svg></span><span><b>Resume</b><small>Download PDF</small></span></a>
   </div>
 
   <!-- ===================== Spotlight ===================== -->
@@ -581,11 +669,11 @@
     <div class="lock-bottom">
       <div class="avatar avatar-lg"><img src="assets/profile.jpg" alt="" onerror="this.remove()"><span>MP</span></div>
       <p class="lock-name">Muhsin PA</p>
-      <button class="lock-enter" data-cmd="unlock">
-        <span class="lock-hint-mac">Click or press Enter to open portfolio</span>
-        <span class="lock-hint-ios">Swipe up or tap to open</span>
-        <svg><use href="#g-arrow-r"/></svg>
-      </button>
+      <div class="lock-enter" id="lock-slider" role="button" tabindex="0" aria-label="Slide, click or press Enter to open the portfolio">
+        <span class="ls-knob" aria-hidden="true"><svg><use href="#g-chev-r"/></svg></span>
+        <span class="ls-text lock-hint-mac">slide to open portfolio</span>
+        <span class="ls-text lock-hint-ios"><svg class="ls-up" aria-hidden="true"><use href="#g-chev-r"/></svg>Swipe up to open</span>
+      </div>
       <span class="lock-homebar" aria-hidden="true"></span>
     </div>
   </div>

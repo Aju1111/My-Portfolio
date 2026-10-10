@@ -62,6 +62,21 @@
       return `<div class="iphone"><div class="screen"><div class="scr ${sc.center ? 'scr-center' : ''}">${h}</div></div></div>`;
     };
 
+    // Web projects: a small browser window with a sidebar, stat tiles and a table or bar chart
+    const browser = (sc) => {
+      const nav = sc.nav.map((n, i) => `<span class="${i === sc.active ? 'on' : ''}">${esc(n)}</span>`).join('');
+      const stats = sc.stats.map(([v, l]) => `<div><b>${esc(v)}</b><small>${esc(l)}</small></div>`).join('');
+      let body = '';
+      if (sc.kind === 'table') {
+        body = `<div class="br-table"><div class="br-tr br-th">${sc.cols.map((c) => `<span>${esc(c)}</span>`).join('')}</div>${
+          sc.rows.map((r) => `<div class="br-tr">${r.map((c, i) => `<span class="${i === r.length - 1 ? `br-pill ${/Qualified|Won/.test(c) ? 'ok' : ''}` : ''}">${esc(c)}</span>`).join('')}</div>`).join('')}</div>`;
+      } else {
+        body = `<div class="br-bars">${sc.bars.map(([l, v]) => `<div class="br-bar-row"><small>${esc(l)}</small><i style="width:${v}%"></i></div>`).join('')}</div>`;
+      }
+      return `<div class="browser"><div class="br-top"><span class="br-dots"><i></i><i></i><i></i></span><span class="br-url">crm · ${esc(sc.title)}</span></div>
+        <div class="br-main"><aside class="br-side">${nav}</aside><div class="br-content"><p class="br-h">${esc(sc.title)}</p><div class="br-stats">${stats}</div>${body}</div></div></div>`;
+    };
+
     const actions = (p) => {
       let a = '';
       if (p.demo) a += `<a href="${esc(p.demo)}" target="_blank" rel="noopener" class="pill pill-blue">Live Demo</a>`;
@@ -82,13 +97,13 @@
           <div>
             <h1 class="product-name">${esc(p.name)}</h1>
             <p class="product-sub">${esc(p.tagline)}</p>
-            <p class="product-date">${esc(p.date)} · Cloud Native IT Solutions</p>
+            <p class="product-date">${esc(p.date)} · ${esc(p.platforms || (p.web ? 'Web app' : 'Android & iOS'))} · Cloud Native IT Solutions</p>
             <div class="product-actions">${actions(p)}</div>
           </div>
         </header>
         <div class="info-strip">${p.info.map(([k, b, s]) => `<div><small>${esc(k)}</small><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join('')}</div>
         <h2 class="section-title">Preview</h2>
-        <div class="shots">${p.screens.map(screen).join('')}</div>
+        <div class="shots">${p.screens.map(p.web ? browser : screen).join('')}</div>
         <h2 class="section-title">About this app</h2>
         <p class="product-text">${esc(p.description)}</p>
         <div class="group group-list">${p.features.map((f) => `<div class="row"><svg class="row-check"><use href="#g-check"/></svg><span class="row-main">${esc(f)}</span></div>`).join('')}</div>
@@ -103,6 +118,14 @@
         <span class="app-row-text"><b>${esc(p.name)}</b><small>${esc(p.summary)} · ${esc(p.date)}</small></span>
         <span class="pill">View</span>
       </a>`).join('');
+
+    $$('.desk-badge').forEach((b) => { b.textContent = list.length; });
+
+    const jobApps = $('#job-apps');
+    if (jobApps) {
+      jobApps.innerHTML = list.map((p) =>
+        `<a href="#project-${p.id}" class="job-app">${icon(p, '')}<span>${esc(p.short)}</span></a>`).join('');
+    }
 
     $('#ios-grid').insertAdjacentHTML('beforeend', list.map((p) =>
       `<a href="#project-${p.id}" class="ios-app">${icon(p, '')}<span>${esc(p.short)}</span></a>`).join(''));
@@ -126,8 +149,8 @@
   // Appearance & wallpaper (Control Center)
   // =========================================================
   function applyTheme(theme) {
-    if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
-    else { delete document.documentElement.dataset.theme; theme = 'auto'; }
+    if (theme !== 'light') theme = 'dark'; // two appearances: Light and Dark (default)
+    document.documentElement.dataset.theme = theme;
     $$('[data-theme-set]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.themeSet === theme)));
     store.set('mp_theme', theme);
   }
@@ -136,7 +159,7 @@
     $$('[data-wall-set]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.wallSet === wall)));
     store.set('mp_wall', wall);
   }
-  applyTheme(store.get('mp_theme', 'auto'));
+  applyTheme(store.get('mp_theme', 'dark'));
   applyWall(store.get('mp_wall', 'sunset'));
   $$('[data-theme-set]').forEach((b) => b.addEventListener('click', () => applyTheme(b.dataset.themeSet)));
   $$('[data-wall-set]').forEach((b) => b.addEventListener('click', () => applyWall(b.dataset.wallSet)));
@@ -159,6 +182,46 @@
   }
   tick();
   setInterval(tick, 15000);
+
+  // Analog clock widget: 60 tick marks, hands updated every second
+  const face = $('.clock-face');
+  if (face) {
+    const NS = 'http://www.w3.org/2000/svg';
+    const ticks = $('.cf-ticks', face);
+    for (let i = 0; i < 60; i++) {
+      const major = i % 5 === 0;
+      const line = document.createElementNS(NS, 'line');
+      line.setAttribute('x1', '50'); line.setAttribute('x2', '50');
+      line.setAttribute('y1', '4.5'); line.setAttribute('y2', major ? '9.5' : '7');
+      line.setAttribute('transform', `rotate(${i * 6} 50 50)`);
+      if (major) line.setAttribute('class', 'major');
+      ticks.appendChild(line);
+    }
+    const hands = { h: $('.cf-h', face), m: $('.cf-m', face), s: $('.cf-s', face) };
+    const moveHands = () => {
+      const d = new Date();
+      const s = d.getSeconds();
+      const m = d.getMinutes() + s / 60;
+      const h = (d.getHours() % 12) + m / 60;
+      hands.h.setAttribute('transform', `rotate(${h * 30} 50 50)`);
+      hands.m.setAttribute('transform', `rotate(${m * 6} 50 50)`);
+      hands.s.setAttribute('transform', `rotate(${s * 6} 50 50)`);
+    };
+    moveHands();
+    setInterval(moveHands, 1000);
+  }
+
+  // World clock: local time in Thrissur and Dubai
+  const zones = $$('[data-tz]');
+  if (zones.length) {
+    const showZones = () => zones.forEach((el) => {
+      try {
+        el.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: el.dataset.tz });
+      } catch { el.textContent = ''; }
+    });
+    showZones();
+    setInterval(showZones, 15000);
+  }
 
   // =========================================================
   // Window manager
@@ -625,19 +688,28 @@
     closeSpot();
     lockEl.hidden = false;
     lockEl.classList.remove('unlocking');
+    resetSlider();
     document.body.classList.add('locked');
-    $('.lock-enter', lockEl).focus();
+    slider.focus();
   }
 
   function unlock() {
     if (lockEl.hidden || lockEl.classList.contains('unlocking')) return;
     session.set('mp_unlocked', '1');
     document.body.classList.remove('locked');
-    if (reduceMotion) lockEl.hidden = true;
-    else {
+    if (reduceMotion) { lockEl.hidden = true; return finishUnlock(); }
+    // Let the knob finish its slide, then fade the lock screen away
+    slider.classList.add('done');
+    knob.style.setProperty('--x', `${sliderMax()}px`);
+    slider.style.setProperty('--fade', '0');
+    setTimeout(() => {
       lockEl.classList.add('unlocking');
       setTimeout(() => { lockEl.hidden = true; }, 600);
-    }
+    }, isPhone() ? 0 : 320);
+    finishUnlock();
+  }
+
+  function finishUnlock() {
     if (!session.get('mp_welcomed')) {
       session.set('mp_welcomed', '1');
       setTimeout(showNotif, 900);
@@ -656,6 +728,44 @@
   }
   notif.addEventListener('click', hideNotif);
 
+  // Slide-to-open knob (desktop): drag it right; short drags spring back
+  const slider = $('#lock-slider');
+  const knob = $('.ls-knob', slider);
+  const sliderMax = () => slider.clientWidth - knob.offsetWidth - 10;
+  let slide = null;
+  let suppressClick = false;
+
+  function resetSlider() {
+    slider.classList.remove('done', 'dragging');
+    knob.style.removeProperty('--x');
+    slider.style.removeProperty('--fade');
+  }
+
+  slider.addEventListener('pointerdown', (e) => {
+    if (isPhone() || e.button !== 0) return;
+    e.stopPropagation();
+    slide = { x: e.clientX, dx: 0, max: sliderMax() };
+    try { slider.setPointerCapture(e.pointerId); } catch { /* keep dragging without capture */ }
+    slider.classList.add('dragging');
+  });
+  slider.addEventListener('pointermove', (e) => {
+    if (!slide) return;
+    slide.dx = Math.min(slide.max, Math.max(0, e.clientX - slide.x));
+    knob.style.setProperty('--x', `${slide.dx}px`);
+    slider.style.setProperty('--fade', String(Math.max(0, 1 - (slide.dx / slide.max) * 1.4)));
+  });
+  const endSlide = () => {
+    if (!slide) return;
+    const { dx, max } = slide;
+    slide = null;
+    slider.classList.remove('dragging');
+    suppressClick = dx > 6; // a real drag, not a click
+    if (dx > max * 0.6) unlock();
+    else resetSlider();
+  };
+  slider.addEventListener('pointerup', endSlide);
+  slider.addEventListener('pointercancel', endSlide);
+
   // Swipe up (or tap / click) to unlock
   let swipeY = null;
   lockEl.addEventListener('pointerdown', (e) => { swipeY = e.clientY; });
@@ -663,7 +773,10 @@
     if (swipeY !== null && swipeY - e.clientY > 40) unlock();
     swipeY = null;
   });
-  lockEl.addEventListener('click', unlock);
+  lockEl.addEventListener('click', () => {
+    if (suppressClick) { suppressClick = false; return; }
+    unlock();
+  });
 
   // =========================================================
   // Commands & keyboard
