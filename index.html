@@ -15,6 +15,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/mac.css">
+  <script>
+    // Phones and small tablets always get the iPhone layout, even in "Desktop site" mode
+    (function () {
+      var ua = navigator.userAgent || '';
+      var mobileUA = /Android|iPhone|iPod|Mobile|Opera Mini|IEMobile/i.test(ua) || (navigator.userAgentData && navigator.userAgentData.mobile);
+      var shortSide = Math.min(screen.width, screen.height);
+      var touchOnly = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      if (mobileUA || (touchOnly && shortSide <= 820)) document.documentElement.classList.add('ios');
+    })();
+  </script>
 </head>
 <body>
 
@@ -262,24 +272,45 @@
 
   <!-- ===================== iOS home screen (phones) ===================== -->
   <main class="ios-home" aria-label="Home screen">
-    <p class="ios-date" data-clock="longdate"></p>
-    <a href="#about" class="ios-widget">
-      <div class="avatar avatar-md">
-        <img src="assets/profile.jpg" alt="" onerror="this.remove()">
-        <span>MP</span>
-      </div>
-      <div>
-        <p class="ios-widget-name">Muhsin PA</p>
-        <p class="ios-widget-role">Flutter &amp; Vue.js Developer</p>
-        <p class="ios-widget-loc"><svg><use href="#g-pin"/></svg>Thrissur, Kerala · 2+ yrs experience</p>
-      </div>
-    </a>
+    <div class="ios-status" aria-hidden="true">
+      <span class="ios-status-time" data-clock="time"></span>
+      <span class="ios-status-icons">
+        <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+        <svg viewBox="0 0 24 24"><use href="#g-wifi"/></svg>
+        <span class="batt ios-batt"><i></i></span>
+      </span>
+    </div>
 
-    <!-- Project apps are appended by app.js from js/projects.js -->
+    <p class="ios-date" data-clock="longdate"></p>
+    <section class="ios-hero">
+      <div class="ios-hero-head">
+        <div class="avatar avatar-md hero-avatar">
+          <img src="assets/profile.jpg" alt="" onerror="this.remove()">
+          <span>MP</span>
+        </div>
+        <div>
+          <p class="ios-hero-hello">Hello, I'm</p>
+          <h1 class="ios-hero-name">Muhsin PA</h1>
+        </div>
+        <span class="w-live ios-live"><i></i>Now</span>
+      </div>
+      <p class="ios-hero-role"><span class="hero-grad">Flutter &amp; Vue.js Developer</span></p>
+      <p class="ios-hero-sub"><svg><use href="#t-frappe"/></svg>Frappe/ERPNext · Cloud Native IT Solutions</p>
+      <p class="ios-hero-desc">Building cross-platform Flutter apps and a Vue.js web CRM for ERP, CRM, HR, salon and food delivery businesses.</p>
+      <div class="ios-hero-stats">
+        <div><b>2+</b><span>Years</span></div>
+        <div><b>7</b><span>Apps built</span></div>
+        <div><b>4</b><span>Platforms</span></div>
+      </div>
+      <div class="ios-hero-actions">
+        <a href="#projects" class="btn btn-blue">View Projects</a>
+        <a href="#contact" class="btn btn-glass">Contact</a>
+      </div>
+    </section>
+
     <nav class="ios-grid" id="ios-grid" aria-label="Apps">
       <a href="#about" class="ios-app"><span class="icon" style="--g: linear-gradient(160deg,#6AC8FF,#0A6CFF)"><svg><use href="#g-person"/></svg></span><span>About</span></a>
       <a href="#skills" class="ios-app"><span class="icon" style="--g: linear-gradient(160deg,#A1A1A6,#5E5E63)"><svg><use href="#g-gear"/></svg></span><span>Skills</span></a>
-      <a href="#experience" class="ios-app"><span class="icon" style="--g: linear-gradient(160deg,#FFC94D,#FF8A00)"><svg><use href="#g-briefcase"/></svg></span><span>Experience</span></a>
       <a href="#projects" class="ios-app"><span class="icon" style="--g: linear-gradient(160deg,#5AD1FF,#1B6DF2)"><svg><use href="#g-apps"/></svg></span><span>Projects</span></a>
       <a href="#resume" class="ios-app"><span class="icon" style="--g: linear-gradient(160deg,#FF7A7A,#E0303A)"><svg><use href="#g-doc"/></svg></span><span>Resume</span></a>
     </nav>
@@ -289,7 +320,7 @@
     <nav class="ios-dock" aria-label="Dock">
       <a href="tel:+918089697979" class="ios-app" aria-label="Call"><span class="icon" style="--g: linear-gradient(160deg,#6EE787,#22B04B)"><svg><use href="#g-phone"/></svg></span></a>
       <a href="#contact" class="ios-app" aria-label="Send a message"><span class="icon" style="--g: linear-gradient(160deg,#6EE787,#22B04B)"><svg><use href="#g-message"/></svg></span></a>
-      <a href="mailto:muhsinpa8@gmail.com" class="ios-app" aria-label="Email"><span class="icon" style="--g: linear-gradient(160deg,#FFFFFF,#D9DEE7)"><svg style="color:#1D7BF0"><use href="#g-mail"/></svg></span></a>
+      <a href="#experience" class="ios-app" aria-label="Experience"><span class="icon" style="--g: linear-gradient(160deg,#FFC94D,#FF8A00)"><svg><use href="#g-briefcase"/></svg></span></a>
       <a href="https://www.linkedin.com/in/muhsin-pa/" target="_blank" rel="noopener" class="ios-app" aria-label="LinkedIn"><span class="icon" style="--g: linear-gradient(160deg,#2C8BEA,#0A5BB5)"><svg><use href="#g-linkedin"/></svg></span></a>
     </nav>
   </main>

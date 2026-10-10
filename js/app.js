@@ -12,7 +12,7 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isPhone = () => window.matchMedia('(max-width: 820px)').matches;
+  const isPhone = () => document.documentElement.classList.contains('ios') || window.matchMedia('(max-width: 820px)').matches;
   const MENUBAR_H = 28;
   const EASE = 'cubic-bezier(.2,.9,.25,1)';
 
@@ -126,9 +126,6 @@
       jobApps.innerHTML = list.map((p) =>
         `<a href="#project-${p.id}" class="job-app">${icon(p, '')}<span>${esc(p.short)}</span></a>`).join('');
     }
-
-    $('#ios-grid').insertAdjacentHTML('beforeend', list.map((p) =>
-      `<a href="#project-${p.id}" class="ios-app">${icon(p, '')}<span>${esc(p.short)}</span></a>`).join(''));
   }
 
   renderProjects(window.PROJECTS || []);
